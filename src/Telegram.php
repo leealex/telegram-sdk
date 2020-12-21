@@ -24,6 +24,10 @@ class Telegram extends Api
      * @var Command[]
      */
     protected $commands = [];
+    /**
+     * @var array
+     */
+    protected $commandsMap = [];
 
     /**
      * Telegram constructor.
@@ -64,6 +68,14 @@ class Telegram extends Api
     }
 
     /**
+     * @param array $map
+     */
+    public function setCommandsMap(array $map)
+    {
+        $this->commandsMap = $map;
+    }
+
+    /**
      * Handling incoming update
      * @throws \Exception
      */
@@ -84,9 +96,12 @@ class Telegram extends Api
     {
         $commandName = 'default';
         if ($text = str_replace('/', '', $this->update->text)) {
+            if (isset($this->commandsMap[$text])) {
+                $text = $this->commandsMap[$text];
+            }
             if ($arguments = explode(' ', $text)) {
-                $name = array_shift($arguments);
-                if (isset($this->commands[$name])){
+                $name = strtolower(array_shift($arguments));
+                if (isset($this->commands[$name])) {
                     $commandName = $name;
                 }
             }

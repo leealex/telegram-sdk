@@ -14,7 +14,7 @@ class Api
     /**
      * @var
      */
-    protected $chatId;
+    public $chatId;
     /**
      * @var
      */
