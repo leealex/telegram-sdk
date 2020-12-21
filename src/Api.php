@@ -6,41 +6,43 @@ use GuzzleHttp\Client;
 use SleekDB\SleekDB;
 
 /**
- * Class Telegram
+ * Class Telegram API
  */
 class Api
 {
-    const FORMAT_AUDIO = 'audio';
-    const FORMAT_PHOTO = 'photo';
-    const FORMAT_DOCUMENT = 'document';
+    const API_URL = 'https://api.telegram.org/bot';
     /**
      * @var
      */
-    public $chatId;
+    protected $chatId;
     /**
      * @var
      */
-    private $token;
-    /**
-     * @var
-     */
-    private $apiUrl = 'https://api.telegram.org/bot';
-
+    protected $token;
     /**
      * @var Client
      */
-    private $client;
+    protected $client;
     /**
      * @var SleekDB
      */
-    private $db;
+    protected $db;
+
 
     /**
+     * @param $action
+     * @return \Exception|mixed|\Throwable
      */
-    public function __construct()
+    public function sendChatAction($action)
     {
-        $this->client = new Client();
-        $this->db = new SleekDB();
+        try {
+            $response = $this->get('sendChatAction', ['action' => $action]);
+            $data = $response->getBody()->getContents();
+
+            return json_decode($data, true);
+        } catch (\Throwable $e) {
+            return $e;
+        }
     }
 
     /**
@@ -56,13 +58,12 @@ class Api
             if (is_array($message)) {
                 $message = implode("\n", $message);
             }
-            $response = $this->client->get($this->apiUrl . $this->token . '/sendMessage', ['query' => [
-                'chat_id' => $this->chatId,
+            $response = $this->get('sendMessage', [
                 'parse_mode' => $format,
                 'text' => $message,
                 'disable_web_page_preview' => $preview,
                 'reply_markup' => $reply_markup
-            ]]);
+            ]);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
@@ -79,10 +80,10 @@ class Api
     public function answerCallback($queryId, $text = null)
     {
         try {
-            $response = $this->client->get($this->apiUrl . $this->token . '/answerCallbackQuery', ['query' => [
+            $response = $this->get('answerCallbackQuery', [
                 'callback_query_id' => $queryId,
                 'text' => $text
-            ]]);
+            ]);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
@@ -92,13 +93,11 @@ class Api
     }
 
     /**
-     * Отправка аудио
-     *
-     * @param string $audio Ссылка на файл или file_id
-     * @param null $message Текст сообщения
-     * @param string $format html|markdown
+     * @param string $audio
+     * @param null $message
+     * @param string $format
      * @param null $reply_markup
-     * @return mixed
+     * @return \Exception|mixed|\Throwable
      */
     public function sendAudio(string $audio, $message = null, $format = 'html', $reply_markup = null)
     {
@@ -106,16 +105,11 @@ class Api
             if (is_array($message)) {
                 $message = implode("\n", $message);
             }
-            $query = [
-                'chat_id' => $this->chatId,
-                'parse_mode' => $format,
-                'caption' => $message,
-                'audio' => $audio
-            ];
+            $query = ['parse_mode' => $format, 'caption' => $message, 'audio' => $audio];
             if ($reply_markup) {
                 $query['reply_markup'] = $reply_markup;
             }
-            $response = $this->client->get($this->apiUrl . $this->token . '/sendAudio', ['query' => $query]);
+            $response = $this->get('sendAudio', $query);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
@@ -125,13 +119,11 @@ class Api
     }
 
     /**
-     * Отправка фото
-     *
-     * @param string $photo Ссылка на файл или file_id
-     * @param null $message Текст сообщения
-     * @param string $format html|markdown
-     * @param null $reply_markup Клавиатура
-     * @return mixed
+     * @param string $photo
+     * @param null $message
+     * @param string $format
+     * @param null $reply_markup
+     * @return \Exception|mixed|\Throwable
      */
     public function sendPhoto(string $photo, $message = null, $format = 'html', $reply_markup = null)
     {
@@ -139,11 +131,11 @@ class Api
             if (is_array($message)) {
                 $message = implode("\n", $message);
             }
-            $query = ['chat_id' => $this->chatId, 'parse_mode' => $format, 'caption' => $message, 'photo' => $photo];
+            $query = ['parse_mode' => $format, 'caption' => $message, 'photo' => $photo];
             if ($reply_markup) {
                 $query['reply_markup'] = $reply_markup;
             }
-            $response = $this->client->get($this->apiUrl . $this->token . '/sendPhoto', ['query' => $query]);
+            $response = $this->get('sendPhoto', $query);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
@@ -153,14 +145,12 @@ class Api
     }
 
     /**
-     * Отправка анимации
-     *
      * @param string $animation
-     * @param null $message Текст сообщения
-     * @param string $format html|markdown
+     * @param null $message
+     * @param string $format
      * @param int $width
      * @param int $height
-     * @return mixed
+     * @return \Exception|mixed|\Throwable
      */
     public function sendAnimation(string $animation, $message = null, $format = 'html', $width = 600, $height = 600)
     {
@@ -168,14 +158,13 @@ class Api
             if (is_array($message)) {
                 $message = implode("\n", $message);
             }
-            $response = $this->client->get($this->apiUrl . $this->token . '/sendAnimation', ['query' => [
-                'chat_id' => $this->chatId,
+            $response = $this->get('sendAnimation', [
                 'parse_mode' => $format,
                 'caption' => $message,
                 'animation' => $animation,
                 'width' => $width,
                 'height' => $height
-            ]]);
+            ]);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
@@ -185,14 +174,12 @@ class Api
     }
 
     /**
-     * Отправка анимации
-     *
-     * @param string $video Ссылка на файл
-     * @param null $message Текст сообщения
-     * @param string $format html|markdown
+     * @param string $video
+     * @param null $message
+     * @param string $format
      * @param int $width
      * @param int $height
-     * @return mixed
+     * @return \Exception|mixed|\Throwable
      */
     public function sendVideo(string $video, $message = null, $format = 'html', $width = 640, $height = 640)
     {
@@ -200,14 +187,13 @@ class Api
             if (is_array($message)) {
                 $message = implode("\n", $message);
             }
-            $response = $this->client->get($this->apiUrl . $this->token . '/sendVideo', ['query' => [
-                'chat_id' => $this->chatId,
+            $response = $this->get('sendVideo', [
                 'parse_mode' => $format,
                 'caption' => $message,
                 'video' => $video,
                 'width' => $width,
                 'height' => $height
-            ]]);
+            ]);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
@@ -217,7 +203,7 @@ class Api
     }
 
     /**
-     * Отправка альбома
+     * Send media group
      *
      * @param array $media [
      *  'type' => 'audio',
@@ -230,10 +216,7 @@ class Api
     public function sendMediaGroup(array $media)
     {
         try {
-            $response = $this->client->get($this->apiUrl . $this->token . '/sendMediaGroup', ['query' => [
-                'chat_id' => $this->chatId,
-                'media' => Json::encode($media)
-            ]]);
+            $response = $this->get('sendMediaGroup', ['media' => json_encode($media)]);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
@@ -243,17 +226,15 @@ class Api
     }
 
     /**
-     * Информация о файле
-     *
      * @param $fileId
-     * @return mixed
+     * @return false[]
      */
     public function getFile($fileId)
     {
         try {
-            $response = $this->client->get($this->apiUrl . $this->token . '/getFile', ['query' => ['file_id' => $fileId]]);
+            $response = $this->get('getFile', ['file_id' => $fileId]);
             $data = $response->getBody()->getContents();
-            $data = Json::decode($data);
+            $data = json_decode($data, true);
 
             return ArrayHelper::getValue($data, 'result');
         } catch (\Throwable $e) {
@@ -264,17 +245,13 @@ class Api
     }
 
     /**
-     * Закрепить сообщение
-     *
      * @param $messageId
-     * @return false[]|mixed|null
+     * @return \Exception|mixed|\Throwable
      */
     public function pinChatMessage($messageId)
     {
         try {
-            $response = $this->client->get($this->apiUrl . $this->token . '/pinChatMessage', ['query' => [
-                'chat_id' => $this->chatId, 'message_id' => $messageId
-            ]]);
+            $response = $this->get('pinChatMessage', ['message_id' => $messageId]);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
@@ -284,19 +261,13 @@ class Api
     }
 
     /**
-     * Открепить сообщение
-     *
-     * @param null $messageId ID сообщения, которое нужно открепить, если не передано, то будет откреплено самое последнее.
-     * @return false[]|mixed|null
+     * @param null $messageId
+     * @return \Exception|mixed|\Throwable
      */
     public function unpinChatMessage($messageId = null)
     {
         try {
-            $query = ['chat_id' => $this->chatId];
-            if ($messageId) {
-                $query['message_id'] = $messageId;
-            }
-            $response = $this->client->get($this->apiUrl . $this->token . '/unpinChatMessage', ['query' => $query]);
+            $response = $this->get('unpinChatMessage', ['message_id' => $messageId]);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
@@ -306,12 +277,10 @@ class Api
     }
 
     /**
-     * Массив фотографий пользователя
-     *
      * @param $userId
-     * @param null $offset
      * @param null $limit
-     * @return array
+     * @param null $offset
+     * @return \Exception|\Throwable
      */
     public function getUserProfilePhotos($userId, $limit = null, $offset = null)
     {
@@ -323,37 +292,43 @@ class Api
             if ($limit) {
                 $query['limit'] = $limit;
             }
-            $response = $this->client->get($this->apiUrl . $this->token . '/getUserProfilePhotos', ['query' => $query]);
+            $response = $this->get('getUserProfilePhotos', $query);
             $data = $response->getBody()->getContents();
-            $data = Json::decode($data);
 
-            return ArrayHelper::getValue($data, 'result.photos', []);
+            return json_decode($data);
         } catch (\Throwable $e) {
-            Yii::error($e, __METHOD__);
-
-            return ['success' => false];
+            return $e;
         }
     }
 
     /**
-     * Удаление сообщения
-     *
      * @param string $userId
      * @param string $messageId
-     * @return false[]|mixed|null
+     * @return \Exception|mixed|\Throwable
      */
     public function deleteMessage(string $userId, string $messageId)
     {
         try {
-            $response = $this->client->get($this->apiUrl . $this->token . '/deleteMessage', ['query' => [
-                'chat_id' => $userId,
-                'message_id' => $messageId
-            ]]);
+            $response = $this->get('deleteMessage', ['message_id' => $messageId]);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
             return $e;
         }
+    }
+
+    /**
+     * Making GET request
+     * @param $uri
+     * @param array $query
+     * @return \Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    private function get($uri, $query = [])
+    {
+        $query = array_merge(['chat_id' => $this->chatId], $query);
+
+        return $this->client->get(self::API_URL . $this->token . '/' . $uri, ['query' => $query]);
     }
 }
