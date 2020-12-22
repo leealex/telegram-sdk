@@ -1,9 +1,11 @@
 <?php
 
-
 namespace TgSdk\objects;
 
-
+/**
+ * Class BaseObject
+ * @package TgSdk\objects
+ */
 class BaseObject
 {
     /**
@@ -35,7 +37,6 @@ class BaseObject
         if ($name === 'from') {
             $class = 'TgSdk\objects\User';
         } else {
-            $c = ucfirst(str_replace('_', '', ucwords($name, '_')));
             $class = 'TgSdk\objects\\' . ucfirst(str_replace('_', '', ucwords($name, '_')));
         }
         if (!class_exists($class)) {
