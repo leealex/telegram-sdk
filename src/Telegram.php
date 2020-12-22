@@ -13,13 +13,9 @@ use TgSdk\objects\Update;
 class Telegram extends Api
 {
     /**
-     * @var string|null
-     */
-    private $dbDir;
-    /**
      * @var Update
      */
-    private $update;
+    protected $update;
     /**
      * @var Command[]
      */
@@ -28,13 +24,18 @@ class Telegram extends Api
      * @var array
      */
     protected $commandsMap = [];
+    /**
+     * @var integer Admin's ID for debugging purposes
+     */
+    protected $adminId;
 
     /**
      * Telegram constructor.
      * @param string $token
      * @param array $config
      * [
-     * db_dir => '/'
+     * db_dir => ''
+     * admin_id => ''
      * ]
      * @throws \Exception
      */
@@ -46,7 +47,9 @@ class Telegram extends Api
         $this->client = new Client();
 
         $dbDir = $config['db_dir'] ?? sys_get_temp_dir();
-        $this->db = new SleekDB($dbDir);
+        $adminId = $config['admin_id'] ?? null;
+        $this->db = SleekDB::store('bot', $dbDir);
+
         $this->commands[] = DefaultCommand::class;
     }
 
@@ -79,13 +82,26 @@ class Telegram extends Api
      * Handling incoming update
      * @throws \Exception
      */
-    public function dispatch()
+    public function dispatch($debug = false)
     {
         $data = json_decode(file_get_contents('php://input'), true);
 
         if ($this->update = new Update($data)) {
-            $this->chatId = $this->update->user->id;
-            $this->runCommand();
+            $updateId = $this->update->update_id;
+            if (!$result = $this->db->where('_id', '=', 1)->fetch()) {
+                $this->db->insert(['update_id' => 0]);
+                $result[0]['update_id'] = 0;
+            }
+            // Run command if the update is new
+            if ($result[0]['update_id'] < $updateId) {
+                $this->db->where('_id', '=', 1)->update(['update_id' => $updateId]);
+                if ($debug && $this->adminId) {
+                    $this->chatId = '117780107';
+                    $this->sendMessage('<pre>' . json_encode($data) . '</pre>');
+                }
+                $this->chatId = $this->update->user->id;
+                $this->runCommand();
+            }
         }
     }
 

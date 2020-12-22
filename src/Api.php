@@ -227,20 +227,17 @@ class Api
 
     /**
      * @param $fileId
-     * @return false[]
+     * @return \Exception|mixed|\Throwable
      */
     public function getFile($fileId)
     {
         try {
             $response = $this->get('getFile', ['file_id' => $fileId]);
             $data = $response->getBody()->getContents();
-            $data = json_decode($data, true);
 
-            return ArrayHelper::getValue($data, 'result');
+            return json_decode($data, true);
         } catch (\Throwable $e) {
-            Yii::error($e, __METHOD__);
-
-            return ['success' => false];
+            return $e;
         }
     }
 
