@@ -35,7 +35,8 @@ class BaseObject
         if ($name === 'from') {
             $class = 'TgSdk\objects\User';
         } else {
-            $class = 'TgSdk\objects\\' . ucfirst($name);
+            $c = ucfirst(str_replace('_', '', ucwords($name, '_')));
+            $class = 'TgSdk\objects\\' . ucfirst(str_replace('_', '', ucwords($name, '_')));
         }
         if (!class_exists($class)) {
             return false;
