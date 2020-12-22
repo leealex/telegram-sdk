@@ -47,7 +47,7 @@ class Telegram extends Api
         $this->client = new Client();
 
         $dbDir = $config['db_dir'] ?? sys_get_temp_dir();
-        $adminId = $config['admin_id'] ?? null;
+        $this->adminId = $config['admin_id'] ?? null;
         $this->db = SleekDB::store('bot', $dbDir);
 
         $this->commands[] = DefaultCommand::class;
