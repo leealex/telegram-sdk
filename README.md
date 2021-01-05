@@ -11,8 +11,22 @@
 <img src="https://img.shields.io/github/last-commit/leealexey/TgSDK?style=flat-square" alt="GitHub last commit">
 </p>
 
+## About
+
 Telegram Bot API SDK lets you develop Telegram Bots in PHP. 
 
 It offers interactions with user by generating inline or custom keyboards.
 
 Please refer to the official documentation https://core.telegram.org/bots/api
+
+## Installation
+
+The recommended way to install SDK is through [Composer](https://getcomposer.org/).
+
+```bash
+composer require leealex/TgSDK
+```
+
+## Usage
+
+TODO...
