@@ -1,6 +1,6 @@
 # Telegram Bot API SDK (PHP)
 
-![Telegram SDK logo](https://user-images.githubusercontent.com/8910097/103631670-15be0d00-4f65-11eb-99d6-0bea99f7f531.jpg)
+![Telegram SDK logo](https://user-images.githubusercontent.com/8910097/103632467-2753e480-4f66-11eb-9fe1-2623439a4974.jpg)
 
 <p align="center">
 <img src="https://img.shields.io/github/license/leealexey/TgSDK?style=flat-square" alt="GitHub">
