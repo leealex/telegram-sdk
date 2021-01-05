@@ -28,7 +28,6 @@ class Api
      */
     protected $db;
 
-
     /**
      * @param $action
      * @return \Exception|mixed|\Throwable
