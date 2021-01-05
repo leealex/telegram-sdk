@@ -2,9 +2,8 @@
 
 ![Telegram inline keyboard](https://core.telegram.org/file/811140659/1/RRJyulbtLBY/ea6163411c7eb4f4dc)
 
-<img src="https://img.shields.io/github/license/leealexey/TgSDK?style=flat-square" alt="GitHub">
-
 <p align="center">
+<img src="https://img.shields.io/github/license/leealexey/TgSDK?style=flat-square" alt="GitHub">
 <img src="https://img.shields.io/packagist/php-v/leealexey/TgSDK?style=flat-square" alt="Packagist PHP Version Support">
 <img src="https://img.shields.io/github/v/release/leealexey/TgSDK?style=flat-square" alt="GitHub release (latest by date)">
 <img src="https://img.shields.io/github/repo-size/leealexey/TgSDK?style=flat-square" alt="GitHub repo size">
