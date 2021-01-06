@@ -4,7 +4,7 @@ namespace TelegramSDK;
 
 /**
  * Class Format
- * @package TgSdk
+ * @package TelegramSDK
  */
 class Format
 {

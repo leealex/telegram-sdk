@@ -35,9 +35,9 @@ class BaseObject
     public function getObject($name, $fields)
     {
         if ($name === 'from') {
-            $class = 'TgSdk\objects\User';
+            $class = 'TelegramSDK\objects\User';
         } else {
-            $class = 'TgSdk\objects\\' . ucfirst(str_replace('_', '', ucwords($name, '_')));
+            $class = 'TelegramSDK\objects\\' . ucfirst(str_replace('_', '', ucwords($name, '_')));
         }
         if (!class_exists($class)) {
             return false;
