@@ -80,7 +80,8 @@ class Telegram extends Api
 
     /**
      * Handling incoming update
-     * @throws \Exception
+     * @param bool $debug
+     * @return bool|\Exception|\Throwable
      */
     public function dispatch($debug = false)
     {
