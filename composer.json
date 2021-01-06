@@ -1,5 +1,5 @@
 {
-  "name": "leealex/tgsdk",
+  "name": "leealex/telegram-sdk",
   "description": "Telegram Bot SDK",
   "type": "library",
   "license": "MIT",
