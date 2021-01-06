@@ -24,7 +24,7 @@ Please refer to the official documentation https://core.telegram.org/bots/api
 The recommended way to install SDK is through [Composer](https://getcomposer.org/).
 
 ```bash
-composer require leealex/TgSDK
+composer require leealex/telegram-sdk
 ```
 
 ## Usage
