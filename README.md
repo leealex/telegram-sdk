@@ -7,7 +7,7 @@
 <img src="https://img.shields.io/packagist/php-v/leealex/telegram-sdk?style=flat-square" alt="Packagist PHP Version Support">
 <img src="https://img.shields.io/github/v/release/leealex/telegram-sdk?style=flat-square" alt="GitHub release (latest by date)">
 <img src="https://img.shields.io/github/repo-size/leealex/telegram-sdk?style=flat-square" alt="GitHub repo size">
-<a href="https://packagist.org/packages/leealex/telegram-sdk"><img src="https://img.shields.io/packagist/dt/leealexey/telegram-sdk?style=flat-square" alt="Packagist Downloads"></a>
+<a href="https://packagist.org/packages/leealex/telegram-sdk"><img src="https://img.shields.io/packagist/dt/leealex/telegram-sdk?style=flat-square" alt="Packagist Downloads"></a>
 <img src="https://img.shields.io/github/last-commit/leealex/telegram-sdk?style=flat-square" alt="GitHub last commit">
 </p>
 
