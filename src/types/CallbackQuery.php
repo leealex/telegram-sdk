@@ -1,13 +1,13 @@
 <?php
 
-namespace TelegramSDK\objects;
+namespace TelegramSDK\types;
 
 /**
- * Class Update
- * @see https://core.telegram.org/bots/api#update
+ * Class CallbackQuery
+ * @see https://core.telegram.org/bots/api#callbackquery
  * @package TelegramSDK
  */
-class CallbackQuery extends BaseObject
+class CallbackQuery extends BaseType
 {
     public $id;
     public $from;

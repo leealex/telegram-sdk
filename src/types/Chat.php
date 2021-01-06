@@ -1,13 +1,13 @@
 <?php
 
-namespace TelegramSDK\objects;
+namespace TelegramSDK\types;
 
 /**
- * Class Update
- * @see https://core.telegram.org/bots/api#update
+ * Class Chat
+ * @see https://core.telegram.org/bots/api#chat
  * @package TelegramSDK
  */
-class Chat extends BaseObject
+class Chat extends BaseType
 {
     public $id;
     public $type;

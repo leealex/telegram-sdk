@@ -1,11 +1,13 @@
 <?php
 
-namespace TelegramSDK\objects;
+namespace TelegramSDK\types;
+
 /**
  * Class Entity
- * @package TelegramSDK\objects
+ * @see https://core.telegram.org/bots/api#messageentity
+ * @package TelegramSDK
  */
-class Entity extends BaseObject
+class MessageEntity extends BaseType
 {
     const TYPE_MENTION = 'mention';
     const TYPE_HASHTAG = 'hashtag';

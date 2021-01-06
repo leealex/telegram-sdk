@@ -5,7 +5,7 @@ namespace TelegramSDK;
 use GuzzleHttp\Client;
 use SleekDB\SleekDB;
 use TelegramSDK\commands\DefaultCommand;
-use TelegramSDK\objects\Update;
+use TelegramSDK\types\Update;
 
 /**
  * Class Telegram
