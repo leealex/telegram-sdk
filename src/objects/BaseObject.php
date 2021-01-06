@@ -1,10 +1,10 @@
 <?php
 
-namespace TgSdk\objects;
+namespace TelegramSDK\objects;
 
 /**
  * Class BaseObject
- * @package TgSdk\objects
+ * @package TelegramSDK\objects
  */
 class BaseObject
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace TgSdk\objects;
+namespace TelegramSDK\objects;
 
 /**
  * Class Update
  * @see https://core.telegram.org/bots/api#update
- * @package TgSdk
+ * @package TelegramSDK
  */
 class Chat extends BaseObject
 {

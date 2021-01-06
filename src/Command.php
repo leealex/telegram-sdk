@@ -1,13 +1,11 @@
 <?php
 
-namespace TgSdk;
-
-use TgSdk\objects\Update;
+namespace TelegramSDK;
 
 /**
  * Class Update
  * @see https://core.telegram.org/bots/api#update
- * @package TgSdk
+ * @package TelegramSDK
  */
 abstract class Command
 {
@@ -34,6 +32,7 @@ abstract class Command
 
     /**
      * Command constructor.
+     * @param Api $api
      */
     public function __construct(Api $api)
     {

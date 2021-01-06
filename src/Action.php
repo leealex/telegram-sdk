@@ -1,10 +1,10 @@
 <?php
 
-namespace TgSdk;
+namespace TelegramSDK;
 
 /**
  * Class Action
- * @package TgSdk
+ * @package TelegramSDK
  */
 class Action
 {

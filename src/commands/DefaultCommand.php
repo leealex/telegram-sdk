@@ -1,14 +1,12 @@
 <?php
 
-namespace TgSdk\commands;
+namespace TelegramSDK\commands;
 
-use TgSdk\Action;
-use TgSdk\Api;
-use TgSdk\Command;
+use TelegramSDK\Command;
 
 /**
  * Class DefaultCommand
- * @package TgSdk\commands
+ * @package TelegramSDK\commands
  */
 class DefaultCommand extends Command
 {

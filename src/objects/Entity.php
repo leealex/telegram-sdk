@@ -1,7 +1,10 @@
 <?php
 
-namespace TgSdk\objects;
-
+namespace TelegramSDK\objects;
+/**
+ * Class Entity
+ * @package TelegramSDK\objects
+ */
 class Entity extends BaseObject
 {
     const TYPE_MENTION = 'mention';

@@ -1,6 +1,6 @@
 <?php
 
-namespace TgSdk;
+namespace TelegramSDK;
 
 use GuzzleHttp\Client;
 use SleekDB\SleekDB;

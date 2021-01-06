@@ -1,11 +1,11 @@
 <?php
 
-namespace TgSdk;
+namespace TelegramSDK;
 
 use GuzzleHttp\Client;
 use SleekDB\SleekDB;
-use TgSdk\commands\DefaultCommand;
-use TgSdk\objects\Update;
+use TelegramSDK\commands\DefaultCommand;
+use TelegramSDK\objects\Update;
 
 /**
  * Class Telegram
