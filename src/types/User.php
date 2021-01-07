@@ -1,11 +1,11 @@
 <?php
 
-namespace TelegramSDK\types;
+namespace leealex\telegram\types;
 
 /**
  * Class User
  * @see https://core.telegram.org/bots/api#user
- * @package TelegramSDK
+ * @package leealex\telegram\types
  */
 class User extends BaseType
 {

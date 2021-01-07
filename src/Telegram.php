@@ -1,14 +1,15 @@
 <?php
 
-namespace TelegramSDK;
+namespace leealex\telegram;
 
 use GuzzleHttp\Client;
 use SleekDB\SleekDB;
-use TelegramSDK\commands\DefaultCommand;
-use TelegramSDK\types\Update;
+use leealex\telegram\commands\DefaultCommand;
+use leealex\telegram\types\Update;
 
 /**
  * Class Telegram
+ * @package leealex\telegram
  */
 class Telegram extends Api
 {

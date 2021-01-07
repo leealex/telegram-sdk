@@ -1,11 +1,11 @@
 <?php
 
-namespace TelegramSDK\types;
+namespace leealex\telegram\types;
 
 /**
  * Class InlineQuery
  * @see https://core.telegram.org/bots/api#inlinequery
- * @package TelegramSDK
+ * @package leealex\telegram\types
  */
 class InlineQuery extends BaseType
 {

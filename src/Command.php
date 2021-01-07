@@ -1,11 +1,10 @@
 <?php
 
-namespace TelegramSDK;
+namespace leealex\telegram;
 
 /**
- * Class Update
- * @see https://core.telegram.org/bots/api#update
- * @package TelegramSDK
+ * Class Command
+ * @package leealex\telegram
  */
 abstract class Command
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace TelegramSDK\commands;
+namespace leealex\telegram\commands;
 
-use TelegramSDK\Command;
+use leealex\telegram\Command;
 
 /**
  * Class DefaultCommand
- * @package TelegramSDK\commands
+ * @package leealex\telegram\commands
  */
 class DefaultCommand extends Command
 {

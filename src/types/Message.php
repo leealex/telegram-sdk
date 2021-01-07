@@ -1,11 +1,11 @@
 <?php
 
-namespace TelegramSDK\types;
+namespace leealex\telegram\types;
 
 /**
  * Class Message
  * @see https://core.telegram.org/bots/api#message
- * @package TelegramSDK
+ * @package leealex\telegram\types
  */
 class Message extends BaseType
 {

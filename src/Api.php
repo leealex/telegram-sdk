@@ -1,22 +1,26 @@
 <?php
 
-namespace TelegramSDK;
+namespace leealex\telegram;
 
 use GuzzleHttp\Client;
 use SleekDB\SleekDB;
 
 /**
- * Class Telegram API
+ * Class Api
+ * @package leealex\telegram
  */
 class Api
 {
+    /**
+     * Telegram API URI
+     */
     const API_URL = 'https://api.telegram.org/bot';
     /**
-     * @var
+     * @var integer
      */
     public $chatId;
     /**
-     * @var
+     * @var string
      */
     protected $token;
     /**

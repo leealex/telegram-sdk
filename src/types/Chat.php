@@ -1,19 +1,37 @@
 <?php
 
-namespace TelegramSDK\types;
+namespace leealex\telegram\types;
 
 /**
  * Class Chat
  * @see https://core.telegram.org/bots/api#chat
- * @package TelegramSDK
+ * @package leealex\telegram\types
  */
 class Chat extends BaseType
 {
+    /**
+     * @var integer
+     */
     public $id;
+    /**
+     * @var string
+     */
     public $type;
+    /**
+     * @var string
+     */
     public $title;
+    /**
+     * @var string
+     */
     public $username;
+    /**
+     * @var string
+     */
     public $first_name;
+    /**
+     * @var string
+     */
     public $last_name;
     public $photo;
     public $bio;

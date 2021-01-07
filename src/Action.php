@@ -1,10 +1,10 @@
 <?php
 
-namespace TelegramSDK;
+namespace leealex\telegram;
 
 /**
  * Class Action
- * @package TelegramSDK
+ * @package leealex\telegram
  */
 class Action
 {

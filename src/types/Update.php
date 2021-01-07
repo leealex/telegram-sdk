@@ -1,32 +1,68 @@
 <?php
 
-namespace TelegramSDK\types;
+namespace leealex\telegram\types;
 
 /**
  * Class Update
  * @see https://core.telegram.org/bots/api#update
- * @package TelegramSDK
+ * @package leealex\telegram\types
  */
 class Update extends BaseType
 {
+    /**
+     * @var integer
+     */
     public $update_id;
+    /**
+     * @var Message
+     */
     public $message;
+    /**
+     * @var Message
+     */
     public $edited_message;
+    /**
+     * @var Message
+     */
     public $channel_post;
+    /**
+     * @var Message
+     */
     public $edited_channel_post;
+    /**
+     * @var InlineQuery
+     */
     public $inline_query;
+    /**
+     * @var
+     */
     public $chosen_inline_result;
+    /**
+     * @var CallbackQuery
+     */
     public $callback_query;
+    /**
+     * @var
+     */
     public $shipping_query;
+    /**
+     * @var
+     */
     public $pre_checkout_query;
+    /**
+     * @var
+     */
     public $poll;
+    /**
+     * @var
+     */
     public $poll_answer;
     /**
      * @var User
      */
     public $user;
     /**
-     * @var Entity
+     * @var MessageEntity
      */
     public $entity;
     /**

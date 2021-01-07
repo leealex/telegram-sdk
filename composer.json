@@ -16,6 +16,6 @@
     "ext-json": "*"
   },
   "autoload": {
-    "psr-4": {"TelegramSDK\\": "src/"}
+    "psr-4": {"leealex\\telegram\\": "src/"}
   }
 }

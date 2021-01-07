@@ -1,10 +1,10 @@
 <?php
 
-namespace TelegramSDK\types;
+namespace leealex\telegram\types;
 
 /**
  * Base type class, all types must extend this class
- * @package TelegramSDK\types
+ * @package leealex\telegram\types
  */
 class BaseType
 {
