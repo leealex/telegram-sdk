@@ -3,10 +3,10 @@
 namespace leealex\telegram;
 
 /**
- * Class Action
+ * Type of action to broadcast
  * @package leealex\telegram
  */
-class Action
+class ChatAction
 {
     const TYPING = 'typing';
     const UPLOAD_photo = 'upload_photo';
