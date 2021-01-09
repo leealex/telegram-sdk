@@ -131,6 +131,6 @@ class Bot extends Api
         }
         /** @var Command $command */
         $command = new $this->commands[$commandName]($this);
-        call_user_func_array([$command, 'run'], $arguments);
+        call_user_func_array([$command, 'execute'], $arguments);
     }
 }

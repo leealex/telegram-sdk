@@ -23,7 +23,7 @@ class DefaultCommand extends Command
     /**
      * @inheritDoc
      */
-    public function run(...$args)
+    public function execute(...$args)
     {
         $this->api->sendMessage('Hi, this is default command.');
     }

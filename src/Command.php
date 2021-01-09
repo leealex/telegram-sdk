@@ -27,7 +27,7 @@ abstract class Command
      * @param mixed ...$args
      * @return mixed
      */
-    abstract function run(...$args);
+    abstract function execute(...$args);
 
     /**
      * Command constructor.
