@@ -8,10 +8,10 @@ use leealex\telegram\commands\DefaultCommand;
 use leealex\telegram\types\Update;
 
 /**
- * Class Telegram
+ * Class Bot
  * @package leealex\telegram
  */
-class Telegram extends Api
+class Bot extends Api
 {
     /**
      * @var Update
@@ -84,7 +84,7 @@ class Telegram extends Api
      * @param bool $debug
      * @return bool|\Exception|\Throwable
      */
-    public function dispatch($debug = false)
+    public function run($debug = false)
     {
         $data = json_decode(file_get_contents('php://input'), true);
 
