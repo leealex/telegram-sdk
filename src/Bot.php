@@ -16,42 +16,52 @@ class Bot extends Api
     /**
      * @var Update
      */
-    public $update;
+    protected $update;
     /**
      * @var Command[]
      */
-    public $commands = [];
+    protected $commands = [];
     /**
      * @var array
      */
-    public $commandsMap = [];
+    protected $commandsMap = [];
     /**
-     * @var integer Admin's ID for debugging purposes
+     * @var integer[] Admin IDs
      */
-    public $adminId;
+    protected $admins = [];
 
     /**
      * Telegram constructor.
      * @param string $token
-     * @param array $config
-     * [
-     * db_dir => ''
-     * admin_id => ''
-     * ]
      * @throws \Exception
      */
-    public function __construct(string $token, array $config = [])
+    public function __construct(string $token)
     {
         if (!$this->token = $token) {
             throw new \Exception('Telegram bot token required.');
         }
         $this->client = new Client();
-
-        $dbDir = $config['db_dir'] ?? sys_get_temp_dir();
-        $this->adminId = $config['admin_id'] ?? null;
-        $this->db = SleekDB::store('bot', $dbDir);
-
+        $this->setDb(sys_get_temp_dir());
         $this->commands[] = DefaultCommand::class;
+    }
+
+    /**
+     * Initiates a database with the specified path
+     * @param string $path
+     * @throws \Exception
+     */
+    public function setDb(string $path)
+    {
+        $this->db = SleekDB::store('bot', $path);
+    }
+
+    /**
+     * Defines admins with their IDs
+     * @param array $ids
+     */
+    public function setAdmins(array $ids)
+    {
+        $this->admins = $ids;
     }
 
     /**
