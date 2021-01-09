@@ -89,4 +89,9 @@ class Update extends BaseType
             $this->user = $this->poll_answer->user;
         }
     }
+
+//    public function getMessage()
+//    {
+//        return new Message();
+//    }
 }

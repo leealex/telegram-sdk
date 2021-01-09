@@ -81,7 +81,7 @@ class BaseType
     public function getObject(string $type, array $fields)
     {
         if (isset(self::$types[$type])) {
-            $class = 'TelegramSDK\types\\' . self::$types[$type];
+            $class = 'leealex\telegram\types\\' . self::$types[$type];
             if (class_exists($class)) {
                 return new $class($fields);
             }

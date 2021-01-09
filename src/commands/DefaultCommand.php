@@ -25,6 +25,8 @@ class DefaultCommand extends Command
      */
     public function execute(...$args)
     {
-        $this->api->sendMessage('Hi, this is default command.');
+        $update = $this->getUpdate();
+
+        $this->bot->sendMessage('Hi, this is default command.');
     }
 }

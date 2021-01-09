@@ -2,6 +2,8 @@
 
 namespace leealex\telegram;
 
+use leealex\telegram\types\Update;
+
 /**
  * Class Command
  * @package leealex\telegram
@@ -9,9 +11,9 @@ namespace leealex\telegram;
 abstract class Command
 {
     /**
-     * @var Api
+     * @var Bot
      */
-    protected $api;
+    protected $bot;
     /**
      * @var string Command Name
      */
@@ -31,10 +33,18 @@ abstract class Command
 
     /**
      * Command constructor.
-     * @param Api $api
+     * @param Bot $bot
      */
-    public function __construct(Api $api)
+    public function __construct(Bot $bot)
     {
-        $this->api = $api;
+        $this->bot = $bot;
+    }
+
+    /**
+     * @return Update
+     */
+    public function getUpdate(): Update
+    {
+        return $this->bot->update;
     }
 }
