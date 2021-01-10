@@ -26,7 +26,23 @@ class DefaultCommand extends Command
     public function execute(...$args)
     {
         $update = $this->getUpdate();
+        $keyboard = $this->createKeyboard([
+            [['text' => '', 'command' => ''], ['text' => '', 'command' => '']],
+            [],
+            []
+        ]);
 
-        $this->bot->sendMessage('Hi, this is default command.');
+
+        $buttons = [
+            ['🍲 Супы', '🍛 Второе'],
+            ['🥨 Выпечка', '🥗 Салаты'],
+            ['🍧 Десерты', '🥪 Закуски']
+        ];
+        $keyboard = json_encode([
+            'keyboard' => $buttons,
+            'resize_keyboard' => true
+        ]);
+
+        $this->bot->sendMessage('Выбери тип блюда', 'html', true, $keyboard);
     }
 }

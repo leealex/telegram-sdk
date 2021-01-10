@@ -16,19 +16,19 @@ class Bot extends Api
     /**
      * @var Update
      */
-    protected $update;
+    public $update;
     /**
      * @var Command[]
      */
-    protected $commands = [];
+    public $commands = [];
     /**
      * @var array
      */
-    protected $commandsMap = [];
+    public $commandsMap = [];
     /**
      * @var integer[] Admin IDs
      */
-    protected $admins = [];
+    public $admins = [];
 
     /**
      * Telegram constructor.
