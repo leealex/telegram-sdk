@@ -91,10 +91,11 @@ class Bot extends Api
 
     /**
      * Handling incoming update
-     * @param bool $debug
+     * @param bool $debug Send raw update to admin
+     * @param bool $onlyNew Skip old updates
      * @return bool|\Exception|\Throwable
      */
-    public function run($debug = false)
+    public function run($debug = false, $onlyNew = true)
     {
         $data = json_decode(file_get_contents('php://input'), true);
 
@@ -106,15 +107,18 @@ class Bot extends Api
                     $result[0]['update_id'] = 0;
                 }
                 // Run command if the update is new
-                if ($result[0]['update_id'] < $updateId) {
-                    $this->db->where('_id', '=', 1)->update(['update_id' => $updateId]);
-                    if ($debug && $this->adminId) {
-                        $this->chatId = '117780107';
+                if ($onlyNew && $result[0]['update_id'] >= $updateId) {
+                    return true;
+                }
+                $this->db->where('_id', '=', 1)->update(['update_id' => $updateId]);
+                if ($debug && $this->admins) {
+                    foreach ($this->admins as $id) {
+                        $this->chatId = $id;
                         $this->sendMessage('<pre>' . json_encode($data) . '</pre>');
                     }
-                    $this->chatId = $this->update->user->id;
-                    $this->runCommand();
                 }
+                $this->chatId = $this->update->user->id;
+                $this->runCommand();
             }
             return true;
         } catch (\Throwable $e) {
@@ -128,6 +132,7 @@ class Bot extends Api
     private function runCommand()
     {
         $commandName = 'default';
+        $arguments = [];
         if ($text = str_replace('/', '', $this->update->text)) {
             if (isset($this->commandsMap[$text])) {
                 $text = $this->commandsMap[$text];
