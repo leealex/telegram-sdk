@@ -30,7 +30,7 @@ composer require leealex/telegram-sdk
 ## Usage
 
 ```php
-// Pass your bot's token to Bot's constructor
+// Pass your bot's token to the Bot's constructor
 $bot = new leealex\telegram\Bot(BOT_TOKEN);
 // Optional. Directory path to store DB files at. Default value: sys_get_temp_dir()
 $bot->setDb(DB_DIR_PATH);
