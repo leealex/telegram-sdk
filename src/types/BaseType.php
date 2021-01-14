@@ -13,7 +13,7 @@ class BaseType
      * @see https://core.telegram.org/bots/api#available-types
      * @var string[]
      */
-    protected static $types = [
+    const TYPES = [
         'message' => 'Message',
         'edited_message' => 'Message',
         'channel_post' => 'Message',
@@ -57,35 +57,47 @@ class BaseType
      * BaseObject constructor.
      * @param array $data
      */
-    public function __construct(array $data)
+    public function __construct(array $data = [])
     {
-        try {
+        if ($data) {
             foreach ($data as $field => $value) {
-                if (property_exists($this, $field)) {
-                    $this->$field = is_array($value) ? $this->getObject($field, $value) : $value;
-                }
+                $this->{$field} = $this->getObject($field, $value);
             }
-            return $this;
-        } catch (\Throwable $e) {
-            return false;
         }
+        $this->validate();
     }
 
     /**
-     * Creating object by it's name and populate it with data
+     * @param $name
+     * @return null
+     */
+    public function __get($name)
+    {
+        return null;
+    }
+
+    /**
+     * This method will be called at the end of the constructor.
+     */
+    public function validate()
+    {
+    }
+
+    /**
+     * Creating object by it's name and populate it with data or return fields
      * @param string $type Object type
-     * @param array $fields
-     * @return false|mixed
+     * @param string|array $fields
+     * @return string|array|BaseType
      * @throws \Exception
      */
-    public function getObject(string $type, array $fields)
+    public function getObject(string $type, $fields)
     {
-        if (isset(self::$types[$type])) {
-            $class = 'leealex\telegram\types\\' . self::$types[$type];
+        if (isset(self::TYPES[$type])) {
+            $class = 'leealex\telegram\types\\' . self::TYPES[$type];
             if (class_exists($class)) {
                 return new $class($fields);
             }
         }
-        return false;
+        return $fields;
     }
 }

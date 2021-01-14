@@ -1,48 +1,31 @@
 <?php
 
-namespace leealex\telegram\commands;
+namespace app\commands;
 
 use leealex\telegram\Command;
 
 /**
- * Class DefaultCommand
- * @package leealex\telegram\commands
+ * This command will be called if there's no appropriate command
+ *
+ * @package app\modules\bot\commands
  */
 class DefaultCommand extends Command
 {
     /**
      * @var string Command Name
      */
-    protected $name = "default";
+    protected $name = 'default';
 
     /**
      * @var string Command Description
      */
-    protected $description = "Default command";
+    protected $description = 'Default Command';
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function execute(...$args)
     {
-        $update = $this->getUpdate();
-        $keyboard = $this->createKeyboard([
-            [['text' => '', 'command' => ''], ['text' => '', 'command' => '']],
-            [],
-            []
-        ]);
-
-
-        $buttons = [
-            ['🍲 Супы', '🍛 Второе'],
-            ['🥨 Выпечка', '🥗 Салаты'],
-            ['🍧 Десерты', '🥪 Закуски']
-        ];
-        $keyboard = json_encode([
-            'keyboard' => $buttons,
-            'resize_keyboard' => true
-        ]);
-
-        $this->bot->sendMessage('Выбери тип блюда', 'html', true, $keyboard);
+        $this->bot->sendMessage('This is the default command', 'html', true);
     }
 }

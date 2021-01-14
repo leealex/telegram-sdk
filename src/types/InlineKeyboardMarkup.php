@@ -7,12 +7,9 @@ namespace leealex\telegram\types;
  *
  * @see https://core.telegram.org/bots/api#inlinekeyboardmarkup
  * @package leealex\telegram\types
+ *
+ * @property array $inline_keyboard Array of button rows, each represented by an Array of InlineKeyboardButton objects
  */
 class InlineKeyboardMarkup extends BaseType
 {
-    /**
-     * Array of button rows, each represented by an Array of InlineKeyboardButton objects
-     * @var InlineKeyboardButton[]
-     */
-    public $inline_keyboard;
 }

@@ -2,6 +2,8 @@
 
 namespace leealex\telegram;
 
+use leealex\telegram\types\InlineKeyboardMarkup;
+use leealex\telegram\types\ReplyKeyboardMarkup;
 use leealex\telegram\types\Update;
 
 /**
@@ -46,5 +48,35 @@ abstract class Command
     public function getUpdate(): Update
     {
         return $this->bot->update;
+    }
+
+    /**
+     * Reply keyboard
+     * @param array $buttons Array of rows, each row contains buttons as array or string
+     * @param array $options @see ReplyKeyboardMarkup
+     * @return false|string JSON-encoded reply keyboard object
+     */
+    public function keyboard(array $buttons, array $options = [])
+    {
+        $keyboard = new ReplyKeyboardMarkup([
+            'keyboard' => $buttons
+        ]);
+
+        return json_encode($keyboard);
+    }
+
+    /**
+     * Inline keyboard
+     * @param array $buttons Array of rows, each row contains buttons as array or string
+     * @param array $options @see InlineKeyboardMarkup
+     * @return false|string JSON-encoded reply keyboard object
+     */
+    public function inlineKeyboard(array $buttons, array $options = [])
+    {
+        $keyboard = new InlineKeyboardMarkup([
+            'keyboard' => $buttons
+        ]);
+
+        return json_encode($keyboard);
     }
 }

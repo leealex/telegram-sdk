@@ -4,7 +4,6 @@ namespace leealex\telegram;
 
 use GuzzleHttp\Client;
 use SleekDB\SleekDB;
-use leealex\telegram\commands\DefaultCommand;
 use leealex\telegram\types\Update;
 
 /**
@@ -22,9 +21,16 @@ class Bot extends Api
      */
     public $commands = [];
     /**
+     * Aliases are primarily used for reply keyboards, which, unlike inline keyboards, cannot pass callback queries.
+     * Reply keyboard passes the text of the button itself, which may contain emoji.
+     * You can use aliases to convert the text on a button to a command. Example:
+     * [
+     *     'Button 1️⃣ 🙂' => 'SomeCommand argument1 argument2',
+     *     'Button 2️⃣ 👍' => 'AnotherCommand argument1',
+     * ]
      * @var array
      */
-    public $commandsMap = [];
+    public $commandsAliases = [];
     /**
      * @var integer[] Admin IDs
      */
@@ -37,12 +43,13 @@ class Bot extends Api
      */
     public function __construct(string $token)
     {
+        $a = get_defined_functions();
         if (!$this->token = $token) {
             throw new \Exception('Telegram bot token required.');
         }
         $this->client = new Client();
         $this->setDb(sys_get_temp_dir());
-        $this->commands[] = DefaultCommand::class;
+        $this->loadCommands(__DIR__ . '/commands');
     }
 
     /**
@@ -65,28 +72,60 @@ class Bot extends Api
     }
 
     /**
-     * Defining commands
-     * @param array $commands
+     * Loads user's commands by specified url
+     * @param string $path
+     * @throws \ReflectionException
      */
-    public function setCommands(array $commands)
+    public function setCommandsPath(string $path)
     {
-        $commands = array_merge($this->commands, $commands);
-        $this->commands = [];
+        $this->loadCommands($path);
+    }
+
+    /**
+     * Loads commands by specified path
+     * @param string $path
+     * @throws \ReflectionException
+     */
+    protected function loadCommands(string $path)
+    {
+        $commands = array_filter(scandir($path), function ($item) use ($path) {
+            return !is_dir($path . '/' . $item);
+        });
         foreach ($commands as $command) {
-            if (class_exists($command)) {
-                $className = substr(strrchr($command, '\\'), 1);
-                $commandName = strtolower(str_replace('Command', '', $className));
-                $this->commands[$commandName] = $command;
+            $namespace = $this->getNamespace($path . '/' . $command);
+            $class = $namespace . '\\' . substr($command, 0, -4);
+            if (class_exists($class)) {
+                $reflectionClass = new \ReflectionClass($class);
+                $parent = $reflectionClass->getParentClass();
+                if ($parent->getName() === 'leealex\telegram\Command') {
+                    $className = substr(strrchr($class, '\\'), 1);
+                    $commandName = strtolower(str_replace('Command', '', $className));
+                    $this->commands[$commandName] = $class;
+                }
             }
         }
     }
 
     /**
-     * @param array $map
+     * Get class's namespace by it's path
+     * @param string $path
+     * @return mixed|null
      */
-    public function setCommandsMap(array $map)
+    protected function getNamespace(string $path)
     {
-        $this->commandsMap = $map;
+        $data = file_get_contents($path);
+        if (preg_match('/^namespace\s+(.+?);/m', $data, $matches)) {
+            return $matches[1];
+        }
+        return null;
+    }
+
+    /**
+     * @param array $aliases
+     */
+    public function setCommandsAliases(array $aliases)
+    {
+        $this->commandsAliases = $aliases;
     }
 
     /**
@@ -135,7 +174,7 @@ class Bot extends Api
         $arguments = [];
         if ($text = str_replace('/', '', $this->update->text)) {
             if (isset($this->commandsMap[$text])) {
-                $text = $this->commandsMap[$text];
+                $text = $this->commandsAliases[$text];
             }
             if ($arguments = explode(' ', $text)) {
                 $name = strtolower(array_shift($arguments));

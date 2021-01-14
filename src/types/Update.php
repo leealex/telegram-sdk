@@ -8,62 +8,45 @@ namespace leealex\telegram\types;
  *
  * @see https://core.telegram.org/bots/api#update
  * @package leealex\telegram\types
+ *
+ * @property integer $update_id The update's unique identifier. Update identifiers start from a certain positive number
+ * and increase sequentially. This ID becomes especially handy if you're using Webhooks, since it allows you to ignore
+ * repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates
+ * for at least a week, then identifier of the next update will be chosen randomly instead of sequentially.
+ *
+ * @property Message $message Optional. New incoming message of any kind — text, photo, sticker, etc.
+ *
+ * @property Message $edited_message Optional. New version of a message that is known to the bot and was edited
+ *
+ * @property Message $channel_post Optional. New incoming channel post of any kind — text, photo, sticker, etc.
+ *
+ * @property Message $edited_channel_post Optional. New version of a channel post that is known to the bot and was edited
+ *
+ * @property InlineQuery $inline_query Optional. New incoming inline query
+ *
+ * @property ChosenInlineResult $chosen_inline_result Optional. The result of an inline query that was chosen by a user
+ * and sent to their chat partner. Please see our documentation on the feedback collecting for details on how to enable
+ * these updates for your bot.
+ *
+ * @property CallbackQuery $callback_query Optional. New incoming callback query
+ *
+ * @property ShippingQuery $shipping_query Optional. New incoming shipping query. Only for invoices with flexible price
+ *
+ * @property PreCheckoutQuery $pre_checkout_query Optional. New incoming pre-checkout query. Contains full information
+ * about checkout
+ *
+ * @property Poll $poll Optional. New poll state. Bots receive only updates about stopped polls and polls,
+ * which are sent by the bot
+ *
+ * @property PollAnswer $poll_answer Optional. A user changed their answer in a non-anonymous poll.
+ * Bots receive new votes only in polls that were sent by the bot itself.
+ *
+ * @property User $user Custom property that holds User object
+ *
+ * @property string $text Custom property that holds input text
  */
 class Update extends BaseType
 {
-    /**
-     * The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially.
-     * This ID becomes especially handy if you're using Webhooks, since it allows you to ignore repeated updates or to
-     * restore the correct update sequence, should they get out of order. If there are no new updates for at least a week,
-     * then identifier of the next update will be chosen randomly instead of sequentially.
-     * @var integer
-     */
-    public $update_id;
-    /**
-     * Optional. New incoming message of any kind — text, photo, sticker, etc.
-     * @var Message
-     */
-    public $message;
-    /**
-     * Optional. New version of a message that is known to the bot and was edited
-     * @var Message
-     */
-    public $edited_message;
-    /**
-     * Optional. New incoming channel post of any kind — text, photo, sticker, etc.
-     * @var Message
-     */
-    public $channel_post;
-    /**
-     * Optional. New version of a channel post that is known to the bot and was edited
-     * @var Message
-     */
-    public $edited_channel_post;
-    /**
-     * Optional. New incoming inline query
-     * @var InlineQuery
-     */
-    public $inline_query;
-    public $chosen_inline_result;
-    /**
-     * Optional. New incoming callback query
-     * @var CallbackQuery
-     */
-    public $callback_query;
-    public $shipping_query;
-    public $pre_checkout_query;
-    public $poll;
-    public $poll_answer;
-
-    /**
-     * @var User
-     */
-    public $user;
-    /**
-     * @var string
-     */
-    public $text;
-
     /**
      * {@inheritDoc}
      */
@@ -89,9 +72,4 @@ class Update extends BaseType
             $this->user = $this->poll_answer->user;
         }
     }
-
-//    public function getMessage()
-//    {
-//        return new Message();
-//    }
 }
