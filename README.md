@@ -29,4 +29,18 @@ composer require leealex/telegram-sdk
 
 ## Usage
 
-TODO...
+```php
+$bot = new leealex\telegram\Bot(BOT_TOKEN);
+// Optional. Directory path to store DB files at. Default value: sys_get_temp_dir()
+$bot->setDb(DB_DIR_PATH);
+// Optional. Array of admins IDs
+$bot->setAdmins([123456789]);
+// Required. Directory path to store all bot's commands 
+$bot->setCommandsPath(COMMANDS_DIR_PATH);
+// Optional. Aliases are primarily used for reply keyboards, which, unlike inline keyboards, cannot pass callback queries. Reply keyboard passes the text of the button itself, which may contain emoji.
+$bot->setCommandsAliases([
+    'Button 1️⃣ 🙂' => 'SomeCommand argument1 argument2',
+    'Button 2️⃣ 👍' => 'AnotherCommand argument1',   
+]);
+$bot->run();
+```

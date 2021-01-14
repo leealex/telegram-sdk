@@ -43,7 +43,6 @@ class Bot extends Api
      */
     public function __construct(string $token)
     {
-        $a = get_defined_functions();
         if (!$this->token = $token) {
             throw new \Exception('Telegram bot token required.');
         }
