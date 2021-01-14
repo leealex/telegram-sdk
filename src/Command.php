@@ -61,7 +61,9 @@ abstract class Command
         $keyboard = new ReplyKeyboardMarkup([
             'keyboard' => $buttons
         ]);
-
+        foreach ($options as $name => $value) {
+            $keyboard->{$name} = $value;
+        }
         return json_encode($keyboard);
     }
 
@@ -76,7 +78,9 @@ abstract class Command
         $keyboard = new InlineKeyboardMarkup([
             'keyboard' => $buttons
         ]);
-
+        foreach ($options as $name => $value) {
+            $keyboard->{$name} = $value;
+        }
         return json_encode($keyboard);
     }
 }
