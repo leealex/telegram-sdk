@@ -172,7 +172,7 @@ class Bot extends Api
         $commandName = 'default';
         $arguments = [];
         if ($text = str_replace('/', '', $this->update->text)) {
-            if (isset($this->commandsMap[$text])) {
+            if (isset($this->commandsAliases[$text])) {
                 $text = $this->commandsAliases[$text];
             }
             if ($arguments = explode(' ', $text)) {
