@@ -300,6 +300,21 @@ class Api
     }
 
     /**
+     * @return \Exception|mixed|\Throwable
+     */
+    public function unpinAllChatMessage()
+    {
+        try {
+            $response = $this->get('unpinAllChatMessages');
+            $data = $response->getBody()->getContents();
+
+            return json_decode($data, true);
+        } catch (\Throwable $e) {
+            return $e;
+        }
+    }
+
+    /**
      * @param $userId
      * @param null $limit
      * @param null $offset
