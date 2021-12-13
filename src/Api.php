@@ -52,10 +52,11 @@ class Api
      * @param $message
      * @param string $format html|markdown
      * @param bool $preview
-     * @param null $reply_markup
+     * @param null $replyMarkup
+     * @param null $replyTo
      * @return mixed
      */
-    public function sendMessage($message, $format = 'html', $preview = true, $reply_markup = null)
+    public function sendMessage($message, string $format = 'html', bool $preview = true, $replyMarkup = null, $replyTo = null)
     {
         try {
             if (is_array($message)) {
@@ -65,7 +66,8 @@ class Api
                 'parse_mode' => $format,
                 'text' => $message,
                 'disable_web_page_preview' => $preview,
-                'reply_markup' => $reply_markup
+                'reply_markup' => $replyMarkup,
+                'reply_to_message_id' => $replyTo
             ]);
             $data = $response->getBody()->getContents();
 
@@ -251,6 +253,25 @@ class Api
         }
     }
 
+    /**
+     * @param $sticker
+     * @param $replyToMessageId
+     * @return \Exception|mixed|\Throwable
+     */
+    public function sendSticker($sticker, $replyToMessageId = null)
+    {
+        try {
+            $response = $this->get('sendSticker', [
+                'sticker' => $sticker,
+                'reply_to_message_id' => $replyToMessageId
+            ]);
+            $data = $response->getBody()->getContents();
+
+            return json_decode($data, true);
+        } catch (\Throwable $e) {
+            return $e;
+        }
+    }
     /**
      * @param $fileId
      * @return \Exception|mixed|\Throwable
