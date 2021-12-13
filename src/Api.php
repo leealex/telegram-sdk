@@ -229,6 +229,29 @@ class Api
     }
 
     /**
+     * Send Poll
+     *
+     * @param string $question
+     * @param array $options
+     * @return mixed
+     */
+    public function sendPoll($question, $options)
+    {
+        try {
+            $response = $this->get('sendPoll', [
+                'question' => $question,
+                'options' => json_encode($options),
+                'is_anonymous' => false,
+            ]);
+            $data = $response->getBody()->getContents();
+
+            return json_decode($data, true);
+        } catch (\Throwable $e) {
+            return $e;
+        }
+    }
+
+    /**
      * @param $fileId
      * @return \Exception|mixed|\Throwable
      */
