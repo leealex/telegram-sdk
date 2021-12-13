@@ -58,7 +58,7 @@ class Bot extends Api
      */
     public function setDb(string $path)
     {
-        $this->db = new Store('bot', $path);
+        $this->db = new Store('bot', $path, ['timeout' => false]);
     }
 
     /**
