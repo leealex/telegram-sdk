@@ -62,6 +62,15 @@ class Bot extends Api
     }
 
     /**
+     * Returns SleekDB instance
+     * @return SleekDB
+     */
+    public function getDb(): SleekDB
+    {
+        return $this->db;
+    }
+
+    /**
      * Defines admins with their IDs
      * @param array $ids
      */
