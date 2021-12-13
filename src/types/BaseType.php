@@ -26,6 +26,7 @@ class BaseType
         'poll' => 'Poll',
         'poll_answer' => 'PollAnswer',
         'from' => 'User',
+        'user' => 'User',
         'sender_chat' => 'Chat',
         'chat' => 'Chat',
         'forward_from' => 'User',
@@ -97,6 +98,13 @@ class BaseType
             if (class_exists($class)) {
                 return new $class($fields);
             }
+        }
+        if ($type === 'options') {
+            $options = [];
+            foreach ($fields as $field) {
+                $options[] = new PollOption($field);
+            }
+            return $options;
         }
         return $fields;
     }

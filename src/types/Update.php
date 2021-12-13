@@ -68,9 +68,6 @@ class Update extends BaseType
         if ($this->pre_checkout_query) {
             $this->user = $this->pre_checkout_query->from;
         }
-        if ($this->poll) {
-            $this->user = $this->poll_answer->user;
-        }
         if ($this->poll_answer) {
             $this->user = $this->poll_answer->user;
         }
