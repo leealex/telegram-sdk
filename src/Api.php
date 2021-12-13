@@ -3,7 +3,7 @@
 namespace leealex\telegram;
 
 use GuzzleHttp\Client;
-use SleekDB\SleekDB;
+use SleekDB\Store;
 
 /**
  * Class Api
@@ -28,7 +28,7 @@ class Api
      */
     protected $client;
     /**
-     * @var SleekDB
+     * @var Store
      */
     protected $db;
 

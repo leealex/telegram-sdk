@@ -3,7 +3,7 @@
 namespace leealex\telegram;
 
 use GuzzleHttp\Client;
-use SleekDB\SleekDB;
+use SleekDB\Store;
 use leealex\telegram\types\Update;
 
 /**
@@ -58,14 +58,14 @@ class Bot extends Api
      */
     public function setDb(string $path)
     {
-        $this->db = SleekDB::store('bot', $path);
+        $this->db = Store::store('bot', $path);
     }
 
     /**
-     * Returns SleekDB instance
-     * @return SleekDB
+     * Returns Store instance
+     * @return Store
      */
-    public function getDb(): SleekDB
+    public function getDb(): Store
     {
         return $this->db;
     }
