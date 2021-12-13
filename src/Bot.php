@@ -58,7 +58,7 @@ class Bot extends Api
      */
     public function setDb(string $path)
     {
-        $this->db = Store::store('bot', $path);
+        $this->db = new Store('bot', $path);
     }
 
     /**
@@ -149,7 +149,7 @@ class Bot extends Api
         try {
             if ($this->update = new Update($data)) {
                 $updateId = $this->update->update_id;
-                if (!$result = $this->db->where('_id', '=', 1)->fetch()) {
+                if (!$result = $this->db->findById(1)) {
                     $this->db->insert(['update_id' => 0]);
                     $result[0]['update_id'] = 0;
                 }
@@ -157,7 +157,7 @@ class Bot extends Api
                 if ($onlyNew && $result[0]['update_id'] >= $updateId) {
                     return true;
                 }
-                $this->db->where('_id', '=', 1)->update(['update_id' => $updateId]);
+                $this->db->updateById(1, ['update_id' => $updateId]);
                 if ($debug && $this->admins) {
                     foreach ($this->admins as $id) {
                         $this->chatId = $id;
