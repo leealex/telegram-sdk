@@ -233,17 +233,20 @@ class Api
     /**
      * Send Poll
      *
-     * @param string $question
-     * @param array $options
+     * @param string $question Poll question, 1-300 characters
+     * @param array $options List of poll options
+     * @param bool $isAnonymous If the poll is anonymous
+     * @param integer|null $limit Amount of time in seconds the poll will be active after creation
      * @return mixed
      */
-    public function sendPoll($question, $options)
+    public function sendPoll(string $question, array $options, bool $isAnonymous = false, int $limit = null)
     {
         try {
             $response = $this->get('sendPoll', [
                 'question' => $question,
                 'options' => json_encode($options),
-                'is_anonymous' => false,
+                'is_anonymous' => $isAnonymous,
+                'open_period' => $limit
             ]);
             $data = $response->getBody()->getContents();
 
