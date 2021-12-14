@@ -1,37 +1,49 @@
-## Welcome to GitHub Pages
+# Telegram Bot API SDK (PHP)
 
-You can use the [editor on GitHub](https://github.com/leealex/telegram-sdk/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
+![Telegram SDK logo](https://user-images.githubusercontent.com/8910097/103632467-2753e480-4f66-11eb-9fe1-2623439a4974.jpg)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<p align="center">
+<img src="https://img.shields.io/github/license/leealex/telegram-sdk?style=flat-square" alt="GitHub">
+<img src="https://img.shields.io/packagist/php-v/leealex/telegram-sdk?style=flat-square" alt="Packagist PHP Version Support">
+<img src="https://img.shields.io/github/v/release/leealex/telegram-sdk?style=flat-square" alt="GitHub release (latest by date)">
+<img src="https://img.shields.io/github/repo-size/leealex/telegram-sdk?style=flat-square" alt="GitHub repo size">
+<a href="https://packagist.org/packages/leealex/telegram-sdk"><img src="https://img.shields.io/packagist/dt/leealex/telegram-sdk?style=flat-square" alt="Packagist Downloads"></a>
+<img src="https://img.shields.io/github/last-commit/leealex/telegram-sdk?style=flat-square" alt="GitHub last commit">
+</p>
 
-### Markdown
+## About
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Telegram Bot API SDK lets you develop Telegram Bots in PHP.
 
-```markdown
-Syntax highlighted code block
+It offers interactions with user by generating inline or custom keyboards.
 
-# Header 1
-## Header 2
-### Header 3
+Please refer to the official documentation https://core.telegram.org/bots/api
 
-- Bulleted
-- List
+## Installation
 
-1. Numbered
-2. List
+The recommended way to install SDK is through [Composer](https://getcomposer.org/).
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```bash
+composer require leealex/telegram-sdk
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Usage
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/leealex/telegram-sdk/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+```php
+// Pass your bot's token to the Bot's constructor
+$bot = new leealex\telegram\Bot(BOT_TOKEN);
+// Optional. Directory path to store DB files at. Default value: sys_get_temp_dir()
+$bot->setDb(DB_DIR_PATH);
+// Optional. Array of admins IDs
+$bot->setAdmins([123456789]);
+// Required. Directory path to store all bot's commands 
+$bot->setCommandsPath(COMMANDS_DIR_PATH);
+// Optional. Aliases are primarily used for reply keyboards, which, unlike inline keyboards,
+// cannot pass callback queries. Reply keyboard passes the text of the button itself,
+// which may contain emoji.
+$bot->setCommandsAliases([
+    'Button 1️⃣ 🙂' => 'SomeCommand argument1 argument2',
+    'Button 2️⃣ 👍' => 'AnotherCommand argument1',   
+]);
+$bot->run();
+```
