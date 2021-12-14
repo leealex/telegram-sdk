@@ -13,7 +13,7 @@
 
 ## About
 
-Telegram Bot API SDK lets you develop Telegram Bots in PHP. 
+Telegram Bot API SDK lets you develop Telegram Bots in PHP.
 
 It offers interactions with user by generating inline or custom keyboards.
 
@@ -47,3 +47,37 @@ $bot->setCommandsAliases([
 ]);
 $bot->run();
 ```
+
+## Data storage
+
+SDK uses lightweight NoSQL database [SleekDB](https://sleekdb.github.io/) to store data.
+
+Bot instance holds SleekDB object to interact with database. Use getDb() method to get SleekDB instance.
+
+```php
+// Get DB
+$db = $bot->getDb();
+// Fetch data
+$user = $db->findBy(['user_id', '=', 123]);
+// Fetch data with query builder
+$users = $db->createQueryBuilder()
+    ->where(['type', '=', 'user'])
+    ->orderBy(['age' => 'desc'])
+    ->limit(10)
+    ->getQuery()
+    ->fetch();
+// Insert data
+$db->insert([
+    'type' => 'user', 
+    'user_id' => 123, 
+    'username' => 'John', 
+    'age' => 18
+]);
+// Update data
+$db->createQueryBuilder()
+    ->where(['user_id', '=', 123])
+    ->getQuery()
+    ->update(['age' => 20]);
+```
+
+See full documentation available at https://sleekdb.github.io
