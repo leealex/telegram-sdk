@@ -80,4 +80,4 @@ $db->createQueryBuilder()
     ->update(['age' => 20]);
 ```
 
-See full documentation available at https://sleekdb.github.io
+See full documentation at [https://sleekdb.github.io](https://sleekdb.github.io)
