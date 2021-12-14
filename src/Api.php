@@ -236,18 +236,32 @@ class Api
      * @param string $question Poll question, 1-300 characters
      * @param array $options List of poll options
      * @param bool $isAnonymous If the poll is anonymous
-     * @param integer|null $closeAt Point in time (Unix timestamp) when the poll will be automatically closed
      * @return mixed
      */
-    public function sendPoll(string $question, array $options, bool $isAnonymous = false, int $closeAt = null)
+    public function sendPoll(string $question, array $options, bool $isAnonymous = false)
     {
         try {
             $response = $this->get('sendPoll', [
                 'question' => $question,
                 'options' => json_encode($options),
-                'is_anonymous' => $isAnonymous,
-                'close_date' => $closeAt
+                'is_anonymous' => $isAnonymous
             ]);
+            $data = $response->getBody()->getContents();
+
+            return json_decode($data, true);
+        } catch (\Throwable $e) {
+            return $e;
+        }
+    }
+
+    /**
+     * @param integer $messageId Identifier of the original message with the poll
+     * @return \Exception|mixed|\Throwable
+     */
+    public function stopPoll(int $messageId)
+    {
+        try {
+            $response = $this->get('stopPoll', ['message_id' => $messageId]);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
