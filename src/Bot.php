@@ -151,10 +151,10 @@ class Bot extends Api
                 $updateId = $this->update->update_id;
                 if (!$result = $this->db->findById(1)) {
                     $this->db->insert(['update_id' => 0]);
-                    $result[0]['update_id'] = 0;
+                    $result['update_id'] = 0;
                 }
                 // Run command if the update is new
-                if ($onlyNew && $result[0]['update_id'] >= $updateId) {
+                if ($onlyNew && $result['update_id'] >= $updateId) {
                     return true;
                 }
                 $this->db->updateById(1, ['update_id' => $updateId]);
