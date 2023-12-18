@@ -20,6 +20,10 @@ class Api
      */
     public $chatId;
     /**
+     * @var int
+     */
+    public $threadId;
+    /**
      * @var string
      */
     protected $token;
@@ -403,7 +407,11 @@ class Api
      */
     private function get($uri, $query = [])
     {
-        $query = array_merge(['chat_id' => $this->chatId], $query);
+        $query['chat_id'] = $this->chatId;
+
+        if (!empty($this->threadId)) {
+            $query['message_thread_id'] = $this->threadId;
+        }
 
         return $this->client->get(self::API_URL . $this->token . '/' . $uri, ['query' => $query]);
     }
