@@ -76,7 +76,7 @@ abstract class Command
     public function inlineKeyboard(array $buttons, array $options = [])
     {
         $keyboard = new InlineKeyboardMarkup([
-            'keyboard' => $buttons
+            'inline_keyboard' => $buttons
         ]);
         foreach ($options as $name => $value) {
             $keyboard->{$name} = $value;
