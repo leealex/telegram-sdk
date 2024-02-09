@@ -382,11 +382,10 @@ class Api
     }
 
     /**
-     * @param string $userId
      * @param string $messageId
      * @return \Exception|mixed|\Throwable
      */
-    public function deleteMessage(string $userId, string $messageId)
+    public function deleteMessage(string $messageId)
     {
         try {
             $response = $this->get('deleteMessage', ['message_id' => $messageId]);
