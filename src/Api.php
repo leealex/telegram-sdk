@@ -404,7 +404,7 @@ class Api
     public function getChat($chatId)
     {
         try {
-            $response = $this->get('getChat', ['chat_d' => $chatId]);
+            $response = $this->get('getChat', ['chat_id' => $chatId]);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
@@ -421,7 +421,7 @@ class Api
     public function getChatMember($chatId, $userId)
     {
         try {
-            $response = $this->get('getChatMember', ['chat_d' => $chatId, 'user_id' => $userId]);
+            $response = $this->get('getChatMember', ['chat_id' => $chatId, 'user_id' => $userId]);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
