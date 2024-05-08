@@ -414,6 +414,23 @@ class Api
     }
 
     /**
+     * @param $chatId
+     * @param $userId
+     * @return \Exception|mixed|\Throwable
+     */
+    public function getChatMember($chatId, $userId)
+    {
+        try {
+            $response = $this->get('getChatMember', ['chat_d' => $chatId, 'user_id' => $userId]);
+            $data = $response->getBody()->getContents();
+
+            return json_decode($data, true);
+        } catch (\Throwable $e) {
+            return $e;
+        }
+    }
+
+    /**
      * Making GET request
      * @param $uri
      * @param array $query
