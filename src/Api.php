@@ -48,7 +48,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -77,7 +77,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -97,7 +97,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -123,7 +123,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -149,7 +149,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -178,7 +178,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -207,7 +207,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -230,7 +230,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -254,7 +254,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -270,7 +270,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -290,7 +290,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
     /**
@@ -305,7 +305,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -321,7 +321,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -337,7 +337,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -352,7 +352,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -377,7 +377,7 @@ class Api
 
             return json_decode($data);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -393,7 +393,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -408,7 +408,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
@@ -424,7 +424,7 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
