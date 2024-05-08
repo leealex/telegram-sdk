@@ -398,13 +398,12 @@ class Api
     }
 
     /**
-     * @param $chatId
      * @return \Exception|mixed|\Throwable
      */
-    public function getChat($chatId)
+    public function getChat()
     {
         try {
-            $response = $this->get('getChat', ['chat_id' => $chatId]);
+            $response = $this->get('getChat');
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
@@ -414,14 +413,13 @@ class Api
     }
 
     /**
-     * @param $chatId
      * @param $userId
      * @return \Exception|mixed|\Throwable
      */
-    public function getChatMember($chatId, $userId)
+    public function getChatMember($userId)
     {
         try {
-            $response = $this->get('getChatMember', ['chat_id' => $chatId, 'user_id' => $userId]);
+            $response = $this->get('getChatMember', ['user_id' => $userId]);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
