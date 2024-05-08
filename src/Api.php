@@ -38,9 +38,9 @@ class Api
 
     /**
      * @param $action
-     * @return \Exception|mixed|\Throwable
+     * @return array
      */
-    public function sendChatAction($action)
+    public function sendChatAction($action): array
     {
         try {
             $response = $this->get('sendChatAction', ['action' => $action]);
@@ -48,7 +48,10 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
@@ -58,9 +61,9 @@ class Api
      * @param bool $preview
      * @param null $replyMarkup
      * @param null $replyTo
-     * @return mixed
+     * @return array
      */
-    public function sendMessage($message, string $format = 'html', bool $preview = true, $replyMarkup = null, $replyTo = null)
+    public function sendMessage($message, string $format = 'html', bool $preview = true, $replyMarkup = null, $replyTo = null): array
     {
         try {
             if (is_array($message)) {
@@ -77,16 +80,19 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
     /**
      * @param $queryId
      * @param null $text
-     * @return \Exception|mixed|\Throwable
+     * @return array
      */
-    public function answerCallback($queryId, $text = null)
+    public function answerCallback($queryId, $text = null): array
     {
         try {
             $response = $this->get('answerCallbackQuery', [
@@ -97,7 +103,10 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
@@ -106,9 +115,9 @@ class Api
      * @param null $message
      * @param string $format
      * @param null $reply_markup
-     * @return \Exception|mixed|\Throwable
+     * @return array
      */
-    public function sendAudio(string $audio, $message = null, $format = 'html', $reply_markup = null)
+    public function sendAudio(string $audio, $message = null, $format = 'html', $reply_markup = null): array
     {
         try {
             if (is_array($message)) {
@@ -123,7 +132,10 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
@@ -132,9 +144,9 @@ class Api
      * @param null $message
      * @param string $format
      * @param null $reply_markup
-     * @return \Exception|mixed|\Throwable
+     * @return array
      */
-    public function sendPhoto(string $photo, $message = null, $format = 'html', $reply_markup = null)
+    public function sendPhoto(string $photo, $message = null, $format = 'html', $reply_markup = null): array
     {
         try {
             if (is_array($message)) {
@@ -149,7 +161,10 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
@@ -159,9 +174,9 @@ class Api
      * @param string $format
      * @param int $width
      * @param int $height
-     * @return \Exception|mixed|\Throwable
+     * @return array
      */
-    public function sendAnimation(string $animation, $message = null, $format = 'html', $width = 600, $height = 600)
+    public function sendAnimation(string $animation, $message = null, $format = 'html', $width = 600, $height = 600): array
     {
         try {
             if (is_array($message)) {
@@ -178,7 +193,10 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
@@ -188,9 +206,9 @@ class Api
      * @param string $format
      * @param int $width
      * @param int $height
-     * @return \Exception|mixed|\Throwable
+     * @return array
      */
-    public function sendVideo(string $video, $message = null, $format = 'html', $width = 640, $height = 640)
+    public function sendVideo(string $video, $message = null, $format = 'html', $width = 640, $height = 640): array
     {
         try {
             if (is_array($message)) {
@@ -207,7 +225,10 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
@@ -220,9 +241,9 @@ class Api
      *  'caption' => '',
      *  'parse_mode' => 'html'
      * ]
-     * @return mixed
+     * @return array
      */
-    public function sendMediaGroup(array $media)
+    public function sendMediaGroup(array $media): array
     {
         try {
             $response = $this->get('sendMediaGroup', ['media' => json_encode($media)]);
@@ -230,7 +251,10 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
@@ -240,9 +264,9 @@ class Api
      * @param string $question Poll question, 1-300 characters
      * @param array $options List of poll options
      * @param bool $isAnonymous If the poll is anonymous
-     * @return mixed
+     * @return array
      */
-    public function sendPoll(string $question, array $options, bool $isAnonymous = false)
+    public function sendPoll(string $question, array $options, bool $isAnonymous = false): array
     {
         try {
             $response = $this->get('sendPoll', [
@@ -254,15 +278,18 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
     /**
      * @param integer $messageId Identifier of the original message with the poll
-     * @return \Exception|mixed|\Throwable
+     * @return array
      */
-    public function stopPoll(int $messageId)
+    public function stopPoll(int $messageId): array
     {
         try {
             $response = $this->get('stopPoll', ['message_id' => $messageId]);
@@ -270,16 +297,19 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
     /**
      * @param $sticker
      * @param $replyToMessageId
-     * @return \Exception|mixed|\Throwable
+     * @return array
      */
-    public function sendSticker($sticker, $replyToMessageId = null)
+    public function sendSticker($sticker, $replyToMessageId = null): array
     {
         try {
             $response = $this->get('sendSticker', [
@@ -290,14 +320,17 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
     /**
      * @param $fileId
-     * @return \Exception|mixed|\Throwable
+     * @return array
      */
-    public function getFile($fileId)
+    public function getFile($fileId): array
     {
         try {
             $response = $this->get('getFile', ['file_id' => $fileId]);
@@ -305,15 +338,18 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
     /**
      * @param $messageId
-     * @return \Exception|mixed|\Throwable
+     * @return array
      */
-    public function pinChatMessage($messageId)
+    public function pinChatMessage($messageId): array
     {
         try {
             $response = $this->get('pinChatMessage', ['message_id' => $messageId]);
@@ -321,15 +357,18 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
     /**
      * @param null $messageId
-     * @return \Exception|mixed|\Throwable
+     * @return array
      */
-    public function unpinChatMessage($messageId = null)
+    public function unpinChatMessage($messageId = null): array
     {
         try {
             $response = $this->get('unpinChatMessage', ['message_id' => $messageId]);
@@ -337,14 +376,17 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
     /**
-     * @return \Exception|mixed|\Throwable
+     * @return array
      */
-    public function unpinAllChatMessage()
+    public function unpinAllChatMessage(): array
     {
         try {
             $response = $this->get('unpinAllChatMessages');
@@ -352,7 +394,10 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
@@ -360,9 +405,9 @@ class Api
      * @param $userId
      * @param null $limit
      * @param null $offset
-     * @return \Exception|\Throwable
+     * @return array
      */
-    public function getUserProfilePhotos($userId, $limit = null, $offset = null)
+    public function getUserProfilePhotos($userId, $limit = null, $offset = null): array
     {
         try {
             $query = ['user_id' => $userId];
@@ -377,15 +422,18 @@ class Api
 
             return json_decode($data);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
     /**
      * @param string $messageId
-     * @return \Exception|mixed|\Throwable
+     * @return array
      */
-    public function deleteMessage(string $messageId)
+    public function deleteMessage(string $messageId): array
     {
         try {
             $response = $this->get('deleteMessage', ['message_id' => $messageId]);
@@ -393,38 +441,49 @@ class Api
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
     /**
-     * @return \Exception|mixed|\Throwable
+     * @param $chatId
+     * @return array
      */
-    public function getChat()
+    public function getChat($chatId): array
     {
         try {
-            $response = $this->get('getChat');
+            $response = $this->get('getChat', ['chat_id' => $chatId]);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
     /**
+     * @param $chatId
      * @param $userId
-     * @return \Exception|mixed|\Throwable
+     * @return array
      */
-    public function getChatMember($userId)
+    public function getChatMember($chatId, $userId): array
     {
         try {
-            $response = $this->get('getChatMember', ['user_id' => $userId]);
+            $response = $this->get('getChatMember', ['chat_id' => $chatId, 'user_id' => $userId]);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
         }
     }
 
@@ -435,9 +494,11 @@ class Api
      * @return \Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    private function get($uri, $query = [])
+    private function get($uri, array $query = [])
     {
-        $query['chat_id'] = $this->chatId;
+        if (empty($query['chat_id'])) {
+            $query['chat_id'] = $this->chatId;
+        }
 
         if (!empty($this->threadId)) {
             $query['message_thread_id'] = $this->threadId;
