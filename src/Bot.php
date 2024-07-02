@@ -165,8 +165,8 @@ class Bot extends Api
                     }
                 }
 
-                if (!$this->chatId = $this->update->user->id) {
-                    $this->chatId = $this->update->chat_member->chat->id;
+                if (!$this->chatId = $this->update->user->id ?? null) {
+                    $this->chatId = $this->update->chat_member->chat->id ?? null;
                 }
 
                 $this->runCommand();
