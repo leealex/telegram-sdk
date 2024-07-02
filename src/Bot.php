@@ -164,7 +164,11 @@ class Bot extends Api
                         $this->sendMessage('<pre>' . json_encode($data) . '</pre>');
                     }
                 }
-                $this->chatId = $this->update->user->id;
+
+                if (!$this->chatId = $this->update->user->id) {
+                    $this->chatId = $this->update->chat_member->chat->id;
+                }
+
                 $this->runCommand();
             }
             return true;
