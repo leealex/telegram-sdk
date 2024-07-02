@@ -44,6 +44,9 @@ namespace leealex\telegram\types;
  * @property User $user Custom property that holds User object
  *
  * @property string $text Custom property that holds input text
+ *
+ * @property ChatMemberUpdated $chat_member Optional. A chat member's status was updated in a chat. The bot must be an administrator
+ * in the chat and must explicitly specify "chat_member" in the list of allowed_updates to receive these updates.
  */
 class Update extends BaseType
 {

@@ -52,6 +52,9 @@ class BaseType
         'passport_data' => 'PassportData',
         'proximity_alert_triggered' => 'ProximityAlertTriggered',
         'reply_markup' => 'InlineKeyboardMarkup',
+        'my_chat_member' => 'Chat member updated',
+        'chat_member' => 'Chat member updated',
+        'chat_join_request' => 'Chat join request'
     ];
 
     /**
