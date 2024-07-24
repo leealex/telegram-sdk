@@ -488,6 +488,44 @@ class Api
     }
 
     /**
+     * @param $chatId
+     * @param string|null $name
+     * @param int|null $expireDate
+     * @param int|null $memberLimit
+     * @param bool $createsJoinRequest
+     * @return array|mixed
+     */
+    public function createChatInviteLink($chatId, string $name = null, int $expireDate = null, int $memberLimit = null, bool $createsJoinRequest = false)
+    {
+        try {
+            $params = [
+                'chat_id' => $chatId,
+                'creates_join_request' => $createsJoinRequest
+            ];
+
+            if ($name) {
+                $params['name'] = $name;
+            }
+            if ($expireDate) {
+                $params['expire_date'] = $expireDate;
+            }
+            if ($memberLimit) {
+                $params['member_limit'] = $memberLimit;
+            }
+
+            $response = $this->get('createChatInviteLink', $params);
+            $data = $response->getBody()->getContents();
+
+            return json_decode($data, true);
+        } catch (\Throwable $e) {
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
+        }
+    }
+
+    /**
      * Making GET request
      * @param $uri
      * @param array $query
