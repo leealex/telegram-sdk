@@ -114,18 +114,18 @@ class Api
      * @param string $audio
      * @param null $message
      * @param string $format
-     * @param null $reply_markup
+     * @param string $replyMarkup
      * @return array
      */
-    public function sendAudio(string $audio, $message = null, $format = 'html', $reply_markup = null): array
+    public function sendAudio(string $audio, $message = null, $format = 'html', $replyMarkup = null): array
     {
         try {
             if (is_array($message)) {
                 $message = implode("\n", $message);
             }
             $query = ['parse_mode' => $format, 'caption' => $message, 'audio' => $audio];
-            if ($reply_markup) {
-                $query['reply_markup'] = $reply_markup;
+            if ($replyMarkup) {
+                $query['reply_markup'] = $replyMarkup;
             }
             $response = $this->get('sendAudio', $query);
             $data = $response->getBody()->getContents();
@@ -143,18 +143,18 @@ class Api
      * @param string $photo
      * @param null $message
      * @param string $format
-     * @param null $reply_markup
+     * @param string $replyMarkup
      * @return array
      */
-    public function sendPhoto(string $photo, $message = null, $format = 'html', $reply_markup = null): array
+    public function sendPhoto(string $photo, $message = null, $format = 'html', $replyMarkup = null): array
     {
         try {
             if (is_array($message)) {
                 $message = implode("\n", $message);
             }
             $query = ['parse_mode' => $format, 'caption' => $message, 'photo' => $photo];
-            if ($reply_markup) {
-                $query['reply_markup'] = $reply_markup;
+            if ($replyMarkup) {
+                $query['reply_markup'] = $replyMarkup;
             }
             $response = $this->get('sendPhoto', $query);
             $data = $response->getBody()->getContents();
@@ -174,21 +174,29 @@ class Api
      * @param string $format
      * @param int $width
      * @param int $height
+     * @param string $replyMarkup
      * @return array
      */
-    public function sendAnimation(string $animation, $message = null, $format = 'html', $width = 600, $height = 600): array
+    public function sendAnimation(string $animation, $message = null, $format = 'html', $width = 600, $height = 600, $replyMarkup = null): array
     {
         try {
             if (is_array($message)) {
                 $message = implode("\n", $message);
             }
-            $response = $this->get('sendAnimation', [
+            $query = [
                 'parse_mode' => $format,
                 'caption' => $message,
                 'animation' => $animation,
                 'width' => $width,
                 'height' => $height
-            ]);
+            ];
+
+            if ($replyMarkup) {
+                $query['reply_markup'] = $replyMarkup;
+            }
+
+            $response = $this->get('sendAnimation', $query);
+
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
@@ -206,21 +214,29 @@ class Api
      * @param string $format
      * @param int $width
      * @param int $height
+     * @param string $replyMarkup
      * @return array
      */
-    public function sendVideo(string $video, $message = null, $format = 'html', $width = 640, $height = 640): array
+    public function sendVideo(string $video, $message = null, $format = 'html', $width = 640, $height = 640, $replyMarkup = null): array
     {
         try {
             if (is_array($message)) {
                 $message = implode("\n", $message);
             }
-            $response = $this->get('sendVideo', [
+            $query =[
                 'parse_mode' => $format,
                 'caption' => $message,
                 'video' => $video,
                 'width' => $width,
                 'height' => $height
-            ]);
+            ];
+
+            if ($replyMarkup) {
+                $query['reply_markup'] = $replyMarkup;
+            }
+
+            $response = $this->get('sendVideo', $query);
+
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
