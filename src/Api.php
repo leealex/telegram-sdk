@@ -88,6 +88,38 @@ class Api
     }
 
     /**
+     * @param int|string $chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param int|string $fromChatId Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
+     * @param int $messageId Message identifier in the chat specified in from_chat_id
+     * @param int|null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * @return array|mixed
+     */
+    public function forwardMessage($chatId, $fromChatId, int $messageId, int $messageThreadId = null)
+    {
+        try {
+            $query = [
+                'chat_id'      => $chatId,
+                'from_chat_id' => $fromChatId,
+                'message_id'   => $messageId,
+            ];
+
+            if (!empty($messageThreadId)) {
+                $query['message_thread_id'] = $messageThreadId;
+            }
+
+            $response = $this->get('forwardMessage', $query);
+            $data = $response->getBody()->getContents();
+
+            return json_decode($data, true);
+        } catch (\Throwable $e) {
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
+        }
+    }
+
+    /**
      * @param $queryId
      * @param null $text
      * @return array
