@@ -47,6 +47,9 @@ namespace leealex\telegram\types;
  *
  * @property ChatMemberUpdated $chat_member Optional. A chat member's status was updated in a chat. The bot must be an administrator
  * in the chat and must explicitly specify "chat_member" in the list of allowed_updates to receive these updates.
+ *
+ * @property ChatMemberUpdated $my_chat_member Optional. The bot's chat member status was updated in a chat. For private chats,
+ * this update is received only when the bot is blocked or unblocked by the user.
  */
 class Update extends BaseType
 {

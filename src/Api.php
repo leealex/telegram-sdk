@@ -537,6 +537,25 @@ class Api
 
     /**
      * @param $chatId
+     * @return array
+     */
+    public function getChatAdministrators($chatId): array
+    {
+        try {
+            $response = $this->get('getChatAdministrators', ['chat_id' => $chatId]);
+            $data = $response->getBody()->getContents();
+
+            return json_decode($data, true);
+        } catch (\Throwable $e) {
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
+        }
+    }
+
+    /**
+     * @param $chatId
      * @param string|null $name
      * @param int|null $expireDate
      * @param int|null $memberLimit
