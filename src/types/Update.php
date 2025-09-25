@@ -50,6 +50,9 @@ namespace leealex\telegram\types;
  *
  * @property ChatMemberUpdated $my_chat_member Optional. The bot's chat member status was updated in a chat. For private chats,
  * this update is received only when the bot is blocked or unblocked by the user.
+ *
+ * @property ChatJoinRequest $chat_join_request Optional. A request to join the chat has been sent. The bot must have
+ * the can_invite_users administrator right in the chat to receive these updates.
  */
 class Update extends BaseType
 {
