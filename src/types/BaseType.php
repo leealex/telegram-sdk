@@ -27,6 +27,7 @@ class BaseType
         'poll_answer'               => 'PollAnswer',
         'from'                      => 'User',
         'user'                      => 'User',
+        'creator'                   => 'User',
         'sender_chat'               => 'Chat',
         'chat'                      => 'Chat',
         'forward_from'              => 'User',
