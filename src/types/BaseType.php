@@ -57,6 +57,7 @@ class BaseType
         'chat_join_request'         => 'ChatJoinRequest',
         'old_chat_member'           => 'ChatMember',
         'new_chat_member'           => 'ChatMember',
+        'invite_link'               => 'ChatInviteLink',
     ];
 
     /**
