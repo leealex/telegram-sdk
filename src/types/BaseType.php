@@ -101,7 +101,7 @@ class BaseType
     {
         if (isset(self::TYPES[$type])) {
             $class = 'leealex\telegram\types\\' . self::TYPES[$type];
-            if (class_exists($class)) {
+            if (class_exists($class) && is_array($fields)) {
                 return new $class($fields);
             }
         }
