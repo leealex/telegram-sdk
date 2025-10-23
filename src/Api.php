@@ -3,7 +3,10 @@
 namespace leealex\telegram;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use Psr\Http\Message\ResponseInterface;
 use SleekDB\Store;
+use Throwable;
 
 /**
  * Class Api
@@ -47,7 +50,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -79,7 +82,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -111,7 +114,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -134,7 +137,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -163,7 +166,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -192,7 +195,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -232,7 +235,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -272,7 +275,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -298,7 +301,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -325,7 +328,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -344,7 +347,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -367,7 +370,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -385,7 +388,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -404,7 +407,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -423,7 +426,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -441,7 +444,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -469,7 +472,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -488,7 +491,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -507,7 +510,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -527,7 +530,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -546,7 +549,7 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -584,7 +587,76 @@ class Api
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
+        }
+    }
+
+    /**
+     * @param $chatId
+     * @param $messageThreadId
+     * @return array|mixed
+     */
+    public function closeForumTopic($chatId, $messageThreadId)
+    {
+        try {
+            $response = $this->get('closeForumTopic', [
+                'chat_id'           => $chatId,
+                'message_thread_id' => $messageThreadId
+            ]);
+            $data = $response->getBody()->getContents();
+
+            return json_decode($data, true);
+        } catch (Throwable $e) {
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
+        }
+    }
+
+    /**
+     * @param $chatId
+     * @param $messageThreadId
+     * @return array|mixed
+     */
+    public function reopenForumTopic($chatId, $messageThreadId)
+    {
+        try {
+            $response = $this->get('reopenForumTopic', [
+                'chat_id'           => $chatId,
+                'message_thread_id' => $messageThreadId
+            ]);
+            $data = $response->getBody()->getContents();
+
+            return json_decode($data, true);
+        } catch (Throwable $e) {
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
+        }
+    }
+
+    /**
+     * @param $chatId
+     * @param $messageThreadId
+     * @return array|mixed
+     */
+    public function deleteForumTopic($chatId, $messageThreadId)
+    {
+        try {
+            $response = $this->get('deleteForumTopic', [
+                'chat_id'           => $chatId,
+                'message_thread_id' => $messageThreadId
+            ]);
+            $data = $response->getBody()->getContents();
+
+            return json_decode($data, true);
+        } catch (Throwable $e) {
             return [
                 'ok'          => false,
                 'description' => $e->getMessage()
@@ -596,8 +668,8 @@ class Api
      * Making GET request
      * @param $uri
      * @param array $query
-     * @return \Psr\Http\Message\ResponseInterface
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return ResponseInterface
+     * @throws GuzzleException
      */
     private function get($uri, array $query = [])
     {
