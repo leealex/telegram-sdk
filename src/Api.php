@@ -59,25 +59,53 @@ class Api
     }
 
     /**
-     * @param $message
+     * @param $text
      * @param string $format html|markdown
      * @param bool $preview
      * @param null $replyMarkup
      * @param null $replyTo
      * @return array
      */
-    public function sendMessage($message, string $format = 'html', bool $preview = true, $replyMarkup = null, $replyTo = null): array
+    public function sendMessage($text, string $format = 'html', bool $preview = true, $replyMarkup = null, $replyTo = null): array
     {
         try {
-            if (is_array($message)) {
-                $message = implode("\n", $message);
+            if (is_array($text)) {
+                $text = implode("\n", $text);
             }
             $response = $this->get('sendMessage', [
-                'parse_mode' => $format,
-                'text' => $message,
+                'parse_mode'               => $format,
+                'text'                     => $text,
                 'disable_web_page_preview' => $preview,
-                'reply_markup' => $replyMarkup,
-                'reply_to_message_id' => $replyTo
+                'reply_markup'             => $replyMarkup,
+                'reply_to_message_id'      => $replyTo
+            ]);
+            $data = $response->getBody()->getContents();
+
+            return json_decode($data, true);
+        } catch (Throwable $e) {
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
+        }
+    }
+
+    /**
+     * @param int|string $messageId
+     * @param string|array $text
+     * @param string $format
+     * @return array|mixed
+     */
+    public function editMessageText($messageId, $text, string $format = 'html')
+    {
+        try {
+            if (is_array($text)) {
+                $text = implode("\n", $text);
+            }
+            $response = $this->get('sendMessage', [
+                'message_id' => $messageId,
+                'text'       => $text,
+                'parse_mode' => $format,
             ]);
             $data = $response->getBody()->getContents();
 
