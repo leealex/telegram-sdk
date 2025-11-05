@@ -102,7 +102,7 @@ class Api
             if (is_array($text)) {
                 $text = implode("\n", $text);
             }
-            $response = $this->get('sendMessage', [
+            $response = $this->get('editMessageText', [
                 'message_id' => $messageId,
                 'text'       => $text,
                 'parse_mode' => $format,
