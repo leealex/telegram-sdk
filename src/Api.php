@@ -174,6 +174,51 @@ class Api
     }
 
     /**
+     * @param $queryId
+     * @param array $results
+     * @param int $cacheTime
+     * @param bool $isPersonal
+     * @param string $nextOffset
+     * @param InlineQueryResultsButton $button
+     * @return array
+     */
+    public function answerInlineQuery($queryId, $results = [], $cacheTime = null, $isPersonal = null, $nextOffset = null, $button = null): array
+    {
+        try {
+            $data = [
+                'inline_query_id' => $queryId,
+                'results'         => $results
+            ];
+
+            if ($cacheTime) {
+                $data['cache_time'] = $cacheTime;
+            }
+
+            if ($isPersonal) {
+                $data['is_personal'] = $isPersonal;
+            }
+
+            if ($nextOffset) {
+                $data['next_offset'] = $nextOffset;
+            }
+
+            if ($button) {
+                $data['button'] = $button;
+            }
+
+            $response = $this->get('answerInlineQuery', $data);
+            $data = $response->getBody()->getContents();
+
+            return json_decode($data, true);
+        } catch (Throwable $e) {
+            return [
+                'ok'          => false,
+                'description' => $e->getMessage()
+            ];
+        }
+    }
+
+    /**
      * @param string $audio
      * @param null $message
      * @param string $format
