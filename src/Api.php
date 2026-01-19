@@ -187,7 +187,7 @@ class Api
         try {
             $data = [
                 'inline_query_id' => $queryId,
-                'results'         => $results
+                'results'         => json_encode($results)
             ];
 
             if ($cacheTime) {
@@ -206,7 +206,7 @@ class Api
                 $data['button'] = $button;
             }
 
-            $response = $this->get('answerInlineQuery', $data);
+            $response = $this->post('answerInlineQuery', $data);
             $data = $response->getBody()->getContents();
 
             return json_decode($data, true);
@@ -755,5 +755,24 @@ class Api
         }
 
         return $this->client->get(self::API_URL . $this->token . '/' . $uri, ['query' => $query]);
+    }
+
+    /**
+     * Making POST request
+     * @param $uri
+     * @param array $params
+     * @return ResponseInterface
+     */
+    private function post($uri, array $params = [])
+    {
+        if (empty($query['chat_id'])) {
+            $query['chat_id'] = $this->chatId;
+        }
+
+        if (!empty($this->threadId)) {
+            $query['message_thread_id'] = $this->threadId;
+        }
+
+        return $this->client->post(self::API_URL . $this->token . '/' . $uri, ['json' => $params]);
     }
 }
