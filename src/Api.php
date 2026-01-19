@@ -190,19 +190,19 @@ class Api
                 'results'         => json_encode($results)
             ];
 
-            if ($cacheTime) {
+            if (!is_null($cacheTime)) {
                 $data['cache_time'] = $cacheTime;
             }
 
-            if ($isPersonal) {
+            if (!is_null($isPersonal)) {
                 $data['is_personal'] = $isPersonal;
             }
 
-            if ($nextOffset) {
+            if (!is_null($nextOffset)) {
                 $data['next_offset'] = $nextOffset;
             }
 
-            if ($button) {
+            if (!is_null($button)) {
                 $data['button'] = $button;
             }
 
