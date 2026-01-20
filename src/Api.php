@@ -203,7 +203,7 @@ class Api
             }
 
             if (!is_null($button)) {
-                $data['button'] = $button;
+                $data['button'] = json_encode($button);
             }
 
             $response = $this->post('answerInlineQuery', $data);
