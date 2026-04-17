@@ -46,7 +46,9 @@ class Bot extends Api
         if (!$this->token = $token) {
             throw new \Exception('Telegram bot token required.');
         }
-        $this->client = new Client();
+        $this->client = new Client([
+            'curl' => [CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V6],
+        ]);
         $this->setDb(sys_get_temp_dir());
         $this->loadCommands(__DIR__ . '/commands');
     }
