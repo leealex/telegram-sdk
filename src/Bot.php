@@ -2,6 +2,7 @@
 
 namespace leealex\telegram;
 
+use Exception;
 use GuzzleHttp\Client;
 use SleekDB\Store;
 use leealex\telegram\types\Update;
@@ -39,16 +40,18 @@ class Bot extends Api
     /**
      * Telegram constructor.
      * @param string $token
-     * @throws \Exception
+     * @param array $options
+     * @throws \ReflectionException
      */
-    public function __construct(string $token)
+    public function __construct(string $token, array $options = [])
     {
         if (!$this->token = $token) {
-            throw new \Exception('Telegram bot token required.');
+            throw new Exception('Telegram bot token required.');
         }
-        $this->client = new Client([
-            'curl' => [CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V6],
-        ]);
+
+        $clientOptions = $options['client'] ?? [];
+        $this->client = new Client($clientOptions);
+
         $this->setDb(sys_get_temp_dir());
         $this->loadCommands(__DIR__ . '/commands');
     }
@@ -56,7 +59,7 @@ class Bot extends Api
     /**
      * Initiates a database with the specified path
      * @param string $path
-     * @throws \Exception
+     * @throws Exception
      */
     public function setDb(string $path)
     {
@@ -142,7 +145,7 @@ class Bot extends Api
      * Handling incoming update
      * @param bool $debug Send raw update to admin
      * @param bool $onlyNew Skip old updates
-     * @return bool|\Exception|\Throwable
+     * @return bool|Exception|\Throwable
      */
     public function run($debug = false, $onlyNew = true)
     {
@@ -180,7 +183,7 @@ class Bot extends Api
     }
 
     /**
-     * Running command by it's name
+     * Running command by its name
      */
     private function runCommand()
     {
